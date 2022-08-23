@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const PROJECT_PREFIX = 'PROJECT_PREFIX';
+const PROJECT_PREFIX = 'bi_bi_scraper';
 const MAX_MEMORY_RESTART = '1024M';
 
 const _projectDirectory = path.join(process.cwd(), '..');

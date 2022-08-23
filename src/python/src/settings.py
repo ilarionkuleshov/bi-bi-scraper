@@ -10,7 +10,7 @@ from scrapy.utils.log import configure_logging
 
 load_dotenv()
 
-BOT_NAME = "YOUR_PROJECT_NAME"
+BOT_NAME = "bi_bi_scraper"
 
 SPIDER_MODULES = ["spiders"]
 NEWSPIDER_MODULE = "spiders"

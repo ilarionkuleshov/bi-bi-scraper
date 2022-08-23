@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "YOUR_PROJECT_NAME"
+name = "bi_bi_scraper"
 version = "2.2.0"
 description = ""
-authors = ["Kristobal Junta <junta.kristobal@gmail.com>"]
+authors = ["Kuleshov Ilarion <ilarion.kuleshov@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
