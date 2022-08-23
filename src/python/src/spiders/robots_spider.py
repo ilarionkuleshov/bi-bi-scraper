@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import traceback
+from furl import furl
 
 from scrapy.spiders import Spider
 from rmq.utils import get_import_full_name
@@ -23,7 +24,9 @@ class RobotsSpider(Spider):
             sitemaps = re.findall(r'Sitemap:\s(.*?.xml)', response.text)
             if sitemaps:
                 for sitemap in sitemaps:
-                    yield SitemapItem({"url": sitemap})
+                    f = furl(sitemap)
+                    f.host = f.host.replace("www.", "")
+                    yield SitemapItem({"url": f.url})
             else:
                 raise Exception("Failed to find sitemaps")
         except Exception as e:
