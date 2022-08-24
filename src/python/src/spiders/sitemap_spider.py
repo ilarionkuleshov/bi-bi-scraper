@@ -39,6 +39,7 @@ class SitemapSpider(BaseRMQSpider):
             urls = re.findall(r'<loc>(.*?)</loc>', response.text)
             if urls:
                 for url in urls:
+                    url = url.replace("%2520", "-")
                     url_details = self.get_url_details(url)
                     if url_details is not None:
                         yield SerpPageItem(
