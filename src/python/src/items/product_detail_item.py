@@ -4,6 +4,7 @@ from scrapy import Field
 
 
 class ProductDetailItem(RMQItem):
+    id = Field()
     url = Field()
     external_id = Field()
     brand = Field()
