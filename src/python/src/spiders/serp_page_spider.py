@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import traceback
+from furl import furl
 
 from scrapy import Request
 from scrapy.utils.project import get_project_settings
@@ -39,14 +40,18 @@ class SerpPageSpider(BaseRMQSpider):
         try:
             urls = response.xpath("//a[contains(@href, '/Product/Details/')]/@href").getall()
             for url in urls:
-                yield ProductDetailItem(
-                    {
-                        "url": f"https://bi-bi.com.ua{url}",
-                        "brand": response.meta.get("serp_brand"),
-                        "model": response.meta.get("serp_model"),
-                        "category": response.meta.get("serp_category"),
-                    }
-                )
+                product_detail_url = f"https://bi-bi.com.ua{url}"
+                external_id = furl(product_detail_url).path.segments[-1]
+                if external_id.isdigit():
+                    yield ProductDetailItem(
+                        {
+                            "url": product_detail_url,
+                            "external_id": int(external_id),
+                            "brand": response.meta.get("serp_brand"),
+                            "model": response.meta.get("serp_model"),
+                            "category": response.meta.get("serp_category"),
+                        }
+                    )
             next_page_href = response.xpath("//a[@rel='next']/@href").get()
             if next_page_href:
                 yield Request(

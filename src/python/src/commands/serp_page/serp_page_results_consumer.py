@@ -18,6 +18,7 @@ class SerpPageResultsConsumer(Consumer):
             stmt = insert(ProductDetail).values(
                 {
                     "url": message_body["url"],
+                    "external_id": message_body["external_id"],
                     "brand": message_body["brand"],
                     "model": message_body["model"],
                     "category": message_body["category"],
