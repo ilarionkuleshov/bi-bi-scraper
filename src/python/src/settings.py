@@ -95,3 +95,7 @@ if datetime(*[int(number) for number in USER_AGENT_RELEASE_DATE.split('-')]) + t
 SITEMAP_TASKS = os.getenv("SITEMAP_TASKS", "sitemap_tasks")
 SITEMAP_REPLIES = os.getenv("SITEMAP_REPLIES", "sitemap_replies")
 SITEMAP_RESULTS = os.getenv("SITEMAP_RESULTS", "sitemap_results")
+
+SERP_PAGE_TASKS = os.getenv("SERP_PAGE_TASKS", "serp_page_tasks")
+SERP_PAGE_REPLIES = os.getenv("SERP_PAGE_REPLIES", "serp_page_replies")
+SERP_PAGE_RESULTS = os.getenv("SERP_PAGE_RESULTS", "serp_page_results")
