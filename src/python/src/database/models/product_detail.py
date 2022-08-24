@@ -10,7 +10,7 @@ class ProductDetail(Base, MysqlPrimaryKeyMixin, MysqlStatusMixin, MysqlTimestamp
     __tablename__ = "product_details"
 
     url = Column("url", VARCHAR(768), unique=True, nullable=False)
-    external_id = Column("external_id", BIGINT(unsigned=True), nullable=True)
+    external_id = Column("external_id", BIGINT(unsigned=True), nullable=False)
     brand = Column("brand", VARCHAR(768), index=True, nullable=False)
     model = Column("model", VARCHAR(768), index=True, nullable=False)
     category = Column("category", VARCHAR(768), index=True, nullable=False)

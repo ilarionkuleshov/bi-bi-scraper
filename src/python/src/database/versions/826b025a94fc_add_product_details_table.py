@@ -23,7 +23,7 @@ def upgrade():
         "product_details",
         Column("id", BIGINT(unsigned=True), primary_key=True, autoincrement=True),
         Column("url", VARCHAR(768), unique=True, nullable=False),
-        Column("external_id", BIGINT(unsigned=True), nullable=True),
+        Column("external_id", BIGINT(unsigned=True), nullable=False),
         Column("brand", VARCHAR(768), index=True, nullable=False),
         Column("model", VARCHAR(768), index=True, nullable=False),
         Column("category", VARCHAR(768), index=True, nullable=False),
