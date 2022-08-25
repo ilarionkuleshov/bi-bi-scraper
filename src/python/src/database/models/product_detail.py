@@ -19,4 +19,8 @@ class ProductDetail(Base, MysqlPrimaryKeyMixin, MysqlStatusMixin, MysqlTimestamp
     price = Column("price", FLOAT(), index=True, nullable=True)
     parameters = Column("parameters", TEXT(), nullable=True)
     description = Column("description", TEXT(), nullable=True)
+    original_number = Column("original_number", VARCHAR(768), nullable=True)
+    condition = Column("condition", VARCHAR(768), index=True, nullable=True)
+    amount = Column("amount", BIGINT(unsigned=True), nullable=True)
+    manufacturer = Column("manufacturer", VARCHAR(768), index=True, nullable=True)
     exception = Column("exception", TEXT(), nullable=True)
