@@ -12,11 +12,11 @@ const {
 
 const spiders = [
   {
-    name: `${PROJECT_PREFIX}_serp_page_spider`,
+    name: `${PROJECT_PREFIX}_sitemap_spider`,
     script: SCRAPY_SCRIPT,
-    args: "crawl serp_page",
+    args: "crawl sitemap",
     interpreter: PYTHON_INTERPRETER,
-    instances: 2,
+    instances: 1,
     autorestart: true,
     cron_restart: "0 * * * *",
   },
@@ -24,9 +24,9 @@ const spiders = [
 
 const producers = [
   {
-    name: `${PROJECT_PREFIX}_serp_page_producer`,
+    name: `${PROJECT_PREFIX}_sitemap_producer`,
     script: SCRAPY_SCRIPT,
-    args: "serp_page_producer -m worker",
+    args: "sitemap_producer -m worker",
     interpreter: PYTHON_INTERPRETER,
     instances: 1,
     autorestart: true,
@@ -36,18 +36,18 @@ const producers = [
 
 const consumers = [
   {
-    name: `${PROJECT_PREFIX}_serp_page_replies_consumer`,
+    name: `${PROJECT_PREFIX}_sitemap_replies_consumer`,
     script: SCRAPY_SCRIPT,
-    args: "serp_page_replies_consumer -m worker",
+    args: "sitemap_replies_consumer -m worker",
     interpreter: PYTHON_INTERPRETER,
     instances: 1,
     autorestart: true,
     cron_restart: "0 * * * *",
   },
   {
-    name: `${PROJECT_PREFIX}_serp_page_results_consumer`,
+    name: `${PROJECT_PREFIX}_sitemap_results_consumer`,
     script: SCRAPY_SCRIPT,
-    args: "serp_page_results_consumer -m worker",
+    args: "sitemap_results_consumer -m worker",
     interpreter: PYTHON_INTERPRETER,
     instances: 1,
     autorestart: true,
