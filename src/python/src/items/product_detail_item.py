@@ -15,3 +15,7 @@ class ProductDetailItem(RMQItem):
     price = Field()
     parameters = Field()
     description = Field()
+    original_number = Field()
+    condition = Field()
+    amount = Field()
+    manufacturer = Field()

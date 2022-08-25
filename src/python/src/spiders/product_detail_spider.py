@@ -48,15 +48,46 @@ class ProductDetailSpider(BaseRMQSpider):
             images = response.xpath("//div[@id='imageBlock']//img[contains(@src, a.allegroimg.com)]/@src").getall()
             images = list(dict.fromkeys(images))
             if len(images):
-                images = "\n".join(images)
+                images = ";".join(images)
             else:
                 images = None
 
             desc_selector = response.xpath("//div[@itemprop='description']")
             description = desc_selector.xpath("div[@id='divInnerDetails']/div[@id='descRus']/text()").get()
+
             parameters = desc_selector.xpath("div[@class='descriptionBlock']/span/text()").getall()
-            if parameters is not None:
+            original_number = None
+            condition = None
+            manufacturer = None
+            if len(parameters):
+                for parameter in parameters:
+                    if "Номер  детали по каталогу: " in parameter:
+                        try:
+                            original_number = parameter.split(": ")[1].strip()
+                        except:
+                            original_number = None
+                    elif "Состояние: " in parameter:
+                        try:
+                            condition = parameter.split(": ")[1].strip()
+                        except:
+                            condition = None
+                    elif "Производитель деталей: " in parameter:
+                        try:
+                            manufacturer = parameter.split(": ")[1].strip()
+                        except:
+                            manufacturer = None
                 parameters = "\n".join(parameters)
+            else:
+                parameters = None
+
+            availability = response.xpath("//span[@itemprop='availability']/text()").get()
+            if availability is not None and "Доступное количество: " in availability:
+                try:
+                    amount = int(availability.split(": ")[1].strip())
+                except:
+                    amount = None
+            else:
+                amount = None
 
             yield ProductDetailItem(
                 {
@@ -66,6 +97,10 @@ class ProductDetailSpider(BaseRMQSpider):
                     "price": price,
                     "parameters": parameters,
                     "description": description,
+                    "original_number": original_number,
+                    "condition": condition,
+                    "amount": amount,
+                    "manufacturer": manufacturer,
                 }
             )
         except Exception as e:
