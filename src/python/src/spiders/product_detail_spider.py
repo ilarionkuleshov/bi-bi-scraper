@@ -48,8 +48,10 @@ class ProductDetailSpider(BaseRMQSpider):
             images = response.xpath("//div[@id='imageBlock']//img[contains(@src, a.allegroimg.com)]/@src").getall()
             images = list(dict.fromkeys(images))
             if len(images):
+                first_image = images[0]
                 images = ";".join(images)
             else:
+                first_image = None
                 images = None
 
             desc_selector = response.xpath("//div[@itemprop='description']")
@@ -59,6 +61,7 @@ class ProductDetailSpider(BaseRMQSpider):
             original_number = None
             condition = None
             manufacturer = None
+            substitute_number = None
             if len(parameters):
                 for parameter in parameters:
                     if "Номер  детали по каталогу: " in parameter:
@@ -76,6 +79,11 @@ class ProductDetailSpider(BaseRMQSpider):
                             manufacturer = parameter.split(": ")[1].strip()
                         except:
                             manufacturer = None
+                    elif "Номер каталоженый замеников: " in parameter:
+                        try:
+                            substitute_number = parameter.split(": ")[1].strip()
+                        except:
+                            substitute_number = None
                 parameters = "\n".join(parameters)
             else:
                 parameters = None
@@ -93,11 +101,13 @@ class ProductDetailSpider(BaseRMQSpider):
                 {
                     "id": response.meta.get("detail_id"),
                     "name": name,
+                    "first_image": first_image,
                     "images": images,
                     "price": price,
                     "parameters": parameters,
                     "description": description,
                     "original_number": original_number,
+                    "substitute_number": substitute_number,
                     "condition": condition,
                     "amount": amount,
                     "manufacturer": manufacturer,

@@ -28,7 +28,7 @@ class RobotsSpider(Spider):
                     f.host = f.host.replace("www.", "")
                     yield SitemapItem({"url": f.url})
             else:
-                raise Exception("Failed to find sitemaps")
+                raise Exception(f"Failed to find sitemaps in {response.url}")
         except Exception as e:
             self.logger.error(e)
             self.logger.warning(traceback.format_exc())

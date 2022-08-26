@@ -47,11 +47,12 @@ class SitemapSpider(BaseRMQSpider):
                                 "url": url,
                                 "brand": url_details["brand"],
                                 "model": url_details["model"],
-                                "category": url_details["category"]
+                                "category": url_details["category"],
+                                "subcategory": url_details["subcategory"]
                             }
                         )
             else:
-                raise Exception("Failed to get urls")
+                raise Exception(f"Failed to get urls from {response.url}")
         except Exception as e:
             self._inject_exception_to_task(
                 response.meta.get("delivery_tag"), e
@@ -62,10 +63,15 @@ class SitemapSpider(BaseRMQSpider):
         try:
             segments = [s.lower() for s in furl(url).path.segments]
             if "topcategory" in segments[0] and segments[1].isdigit() and not "group-" in segments[2] and "group-" in segments[4]:
+                if len(segments) > 6:
+                    subcategory = segments[-1]
+                else:
+                    subcategory = None
                 return {
                     "brand": segments[2],
                     "model": segments[3],
                     "category": segments[5],
+                    "subcategory": subcategory
                 }
             else:
                 return None

@@ -28,6 +28,7 @@ class SerpPageSpider(BaseRMQSpider):
                 "serp_brand": data["brand"],
                 "serp_model": data["model"],
                 "serp_category": data["category"],
+                "serp_subcategory": data["subcategory"],
                 "delivery_tag": _delivery_tag,
             },
             callback=self.parse,
@@ -50,6 +51,7 @@ class SerpPageSpider(BaseRMQSpider):
                             "brand": response.meta.get("serp_brand"),
                             "model": response.meta.get("serp_model"),
                             "category": response.meta.get("serp_category"),
+                            "subcategory": response.meta.get("serp_subcategory"),
                         }
                     )
             next_page_href = response.xpath("//a[@rel='next']/@href").get()
@@ -60,6 +62,7 @@ class SerpPageSpider(BaseRMQSpider):
                         "serp_brand": response.meta.get("serp_brand"),
                         "serp_model": response.meta.get("serp_model"),
                         "serp_category": response.meta.get("serp_category"),
+                        "serp_subcategory": response.meta.get("serp_subcategory"),
                         "delivery_tag": response.meta.get("delivery_tag"),
                     },
                     callback=self.parse,
