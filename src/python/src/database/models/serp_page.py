@@ -13,4 +13,5 @@ class SerpPage(Base, MysqlPrimaryKeyMixin, MysqlStatusMixin, MysqlTimestampsMixi
     brand = Column("brand", VARCHAR(768), index=True, nullable=False)
     model = Column("model", VARCHAR(768), index=True, nullable=False)
     category = Column("category", VARCHAR(768), index=True, nullable=False)
+    subcategory = Column("subcategory", VARCHAR(768), index=True, nullable=True)
     exception = Column("exception", TEXT(), nullable=True)
