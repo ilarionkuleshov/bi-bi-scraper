@@ -14,7 +14,7 @@ class SerpPageProducer(Producer):
         self.reply_to_queue_name = settings.get("SERP_PAGE_REPLIES")
 
     def build_task_query_stmt(self, chunk_size):
-        stmt = select([SerpPage.id, SerpPage.url, SerpPage.brand, SerpPage.model, SerpPage.category]).where(
+        stmt = select([SerpPage.id, SerpPage.url, SerpPage.brand, SerpPage.model, SerpPage.category, SerpPage.subcategory]).where(
             SerpPage.status == TaskStatusCodes.NOT_PROCESSED.value
         ).order_by(SerpPage.id.asc()).limit(chunk_size)
         return stmt

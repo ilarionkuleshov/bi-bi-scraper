@@ -21,6 +21,7 @@ class SitemapResultsConsumer(Consumer):
                     "brand": message_body["brand"],
                     "model": message_body["model"],
                     "category": message_body["category"],
+                    "subcategory": message_body["subcategory"],
                 }
             ).prefix_with("IGNORE")
             transaction.execute(str(stmt.compile(dialect=mysql.dialect())),

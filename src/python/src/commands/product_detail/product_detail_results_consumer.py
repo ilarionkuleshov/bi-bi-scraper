@@ -21,11 +21,13 @@ class ProductDetailResultsConsumer(Consumer):
                 .values(
                     {
                         "name": message_body["name"],
+                        "first_image": message_body["first_image"],
                         "images": message_body["images"],
                         "price": message_body["price"],
                         "parameters": message_body["parameters"],
                         "description": message_body["description"],
                         "original_number": message_body["original_number"],
+                        "substitute_number": message_body["substitute_number"],
                         "condition": message_body["condition"],
                         "amount": message_body["amount"],
                         "manufacturer": message_body["manufacturer"],
