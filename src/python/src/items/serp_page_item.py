@@ -8,3 +8,4 @@ class SerpPageItem(RMQItem):
     brand = Field()
     model = Field()
     category = Field()
+    subcategory = Field()
