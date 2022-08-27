@@ -49,7 +49,7 @@ const consumers = [
     script: SCRAPY_SCRIPT,
     args: "sitemap_results_consumer -m worker",
     interpreter: PYTHON_INTERPRETER,
-    instances: 1,
+    instances: 3,
     autorestart: true,
     cron_restart: "0 * * * *",
   },
