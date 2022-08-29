@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import Column
-from sqlalchemy.dialects.mysql import VARCHAR, TEXT, FLOAT, BIGINT
+from sqlalchemy.dialects.mysql import VARCHAR, TEXT, FLOAT, BIGINT, DATE
 
 from .base import Base
 from .mixins import MysqlPrimaryKeyMixin, MysqlStatusMixin, MysqlTimestampsMixin
@@ -27,3 +27,4 @@ class ProductDetail(Base, MysqlPrimaryKeyMixin, MysqlStatusMixin, MysqlTimestamp
     amount = Column("amount", BIGINT(unsigned=True), nullable=True)
     manufacturer = Column("manufacturer", VARCHAR(768), index=True, nullable=True)
     exception = Column("exception", TEXT(), nullable=True)
+    sent_to_customer = Column("sent_to_customer", DATE(), default=None, nullable=True)
