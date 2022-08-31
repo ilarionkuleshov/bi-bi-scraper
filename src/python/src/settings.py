@@ -90,3 +90,16 @@ if IS_SENTRY_ENABLED:
 configure_logging()
 if datetime(*[int(number) for number in USER_AGENT_RELEASE_DATE.split('-')]) + timedelta(days=180) < datetime.now():
     logging.warning('USER_AGENT is outdated')
+
+# QUEUE SETTINGS
+SITEMAP_TASKS = os.getenv("SITEMAP_TASKS", "sitemap_tasks")
+SITEMAP_REPLIES = os.getenv("SITEMAP_REPLIES", "sitemap_replies")
+SITEMAP_RESULTS = os.getenv("SITEMAP_RESULTS", "sitemap_results")
+
+SERP_PAGE_TASKS = os.getenv("SERP_PAGE_TASKS", "serp_page_tasks")
+SERP_PAGE_REPLIES = os.getenv("SERP_PAGE_REPLIES", "serp_page_replies")
+SERP_PAGE_RESULTS = os.getenv("SERP_PAGE_RESULTS", "serp_page_results")
+
+PRODUCT_DETAIL_TASKS = os.getenv("PRODUCT_DETAIL_TASKS", "product_detail_tasks")
+PRODUCT_DETAIL_REPLIES = os.getenv("PRODUCT_DETAIL_REPLIES", "product_detail_replies")
+PRODUCT_DETAIL_RESULTS = os.getenv("PRODUCT_DETAIL_RESULTS", "product_detail_results")
